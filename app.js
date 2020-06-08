@@ -6,8 +6,10 @@ var tracker = {
 }
 
 //////////////////////////////////////////////
-//controller
+//get all play pieces
 
+
+//controllers
 var checkWinner = function(currentPlayer) {
   for (var i = 0; i < tracker[currentPlayer].length; i++) {
     if (tracker[currentPlayer][i].length === 3) {
@@ -26,7 +28,7 @@ var checkWinner = function(currentPlayer) {
     return;
 }
 
-const playMove = function(event) {
+const playMove = function(event) {  
   //find current player
   (moveNum % 2 === 0) ? currentPlayer = "X" : currentPlayer = "O";
   event.target.textContent = currentPlayer;
@@ -36,7 +38,12 @@ const playMove = function(event) {
       checkWinner(currentPlayer);
   }
   moveNum++;
+  this.removeEventListener('dblclick', playMove);
 }
 
 //render move
+var plays = document.getElementsByClassName('play');
+Array.from(plays).forEach(play => {
+  play.addEventListener('dblclick', playMove, false);
+})
 

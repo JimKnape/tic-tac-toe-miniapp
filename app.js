@@ -1,5 +1,7 @@
 //Model
+
 var players = {first: 'X', second: 'O'};
+var player1, player2;
 var moveNum = 0;
 var tracker = {
     X: [[], [], []],
@@ -9,6 +11,13 @@ var gameCount = {X: 0, O: 0}
 
 //////////////////////////////////////////////
 //controllers
+var getPlayers = function() {
+  player1 = prompt('Player 1');
+  player2 = prompt('Player 2');
+  addPlayers(player1, player2)
+}
+
+
 var setScore = function(currentPlayer) {
   gameCount[currentPlayer]++
 }
@@ -73,7 +82,7 @@ const playMove = function(event) {
   this.removeEventListener('dblclick', playMove);
 }
 
-/////////// renders /////////////////////////////////////////////////////////\
+/////////// renders //////////////////////////////////////////////////////////
 
 resetBoard();
 
@@ -85,5 +94,12 @@ var renderScore = function() {
   oGameScore.textContent = gameCount.O;
 }
 
+var addPlayers = function(player1, player2) {
+   let first = document.getElementById('firstPlayer');
+   let second = document.getElementById('secondPlayer');
+   first.textContent = player1;
+   second.textContent = player2;
+}
 
+getPlayers();
 

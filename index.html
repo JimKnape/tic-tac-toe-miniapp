@@ -17,8 +17,9 @@
       }
       #scores {
           height: 10px;
-          width: 100px;
+          width:300px;
           padding-bottom: 10px;
+          border: 1px solid black;
       }
       .play {
         border: 1px solid black;
@@ -34,10 +35,15 @@
     <div class="score"> Game Score:</div>
     <table id="scores">
         <tr>
+            <td>Player 1:</td><td id="firstPlayer"></td>
+            <td>Player 2:</td><td id="secondPlayer"></td>
+        </tr>
+        <tr>
             <td>X:</td>
             <td id="xscore"></td>
             <td>O:</td>
             <td id="oscore"></td>
+        </tr>
     <table>
       <tr id='0'>
         <td class='play' id='0'></td>

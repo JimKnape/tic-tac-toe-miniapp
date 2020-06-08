@@ -13,8 +13,14 @@
           border: 1px solid black;
           border-spacing: 0;
           border-collapse: collapse;
+          padding: 10px;
       }
-      td {
+      #scores {
+          height: 10px;
+          width: 100px;
+          padding-bottom: 10px;
+      }
+      .play {
         border: 1px solid black;
         height: 200px;
         text-align: center;
@@ -25,6 +31,13 @@
   </head>
   <body>
     <h1> Tic-Tac-Toe</h1>
+    <div class="score"> Game Score:</div>
+    <table id="scores">
+        <tr>
+            <td>X:</td>
+            <td id="xscore"></td>
+            <td>O:</td>
+            <td id="oscore"></td>
     <table>
       <tr id='0'>
         <td class='play' id='0'></td>

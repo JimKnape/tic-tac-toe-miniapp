@@ -4,28 +4,38 @@ var tracker = {
     X: [[], [], []],
     O: [[], [], []]
 }
+var gameCount = {X: 0, O: 0}
 
 //////////////////////////////////////////////
-//get all play pieces
-
-
 //controllers
+var setScore = function(currentPlayer) {
+  gameCount[currentPlayer]++
+}
+
+var resetBoard = function(){
+    var plays = document.getElementsByClassName('play');
+    Array.from(plays).forEach(play => {
+      play.textContent = '';
+      play.addEventListener('dblclick', playMove, false);
+    })
+};
+
+
 var checkWinner = function(currentPlayer) {
-  for (var i = 0; i < tracker[currentPlayer].length; i++) {
+    var hasWinner= false;
+    for (var i = 0; i < tracker[currentPlayer].length; i++) {
     if (tracker[currentPlayer][i].length === 3) {
       alert(`Player ${currentPlayer} wins!`);
-      //update game totals and reset board
-      return;
+      hasWinner = true;
     }
   }
   if (tracker[currentPlayer][1].indexOf(1) !== -1) {
       if ((tracker[currentPlayer][0].indexOf(0) !== -1 && tracker[currentPlayer][2].indexOf(2) !== -1) || (tracker[currentPlayer][0].indexOf(2) !== -1 && tracker[currentPlayer][2].indexOf(0) !== -1)) {
         alert(`Player ${currentPlayer} wins!`);
-        //update game totals and reset board?
-        return;
+        hasWinner = true;
       }
     }
-    return;
+    return hasWinner;
 }
 
 const playMove = function(event) {  
@@ -35,15 +45,28 @@ const playMove = function(event) {
   tracker[currentPlayer][event.target.parentNode.id].push(Number(event.target.id))
   //check for winner
   if (moveNum >= 4) {
-      checkWinner(currentPlayer);
+      if (checkWinner(currentPlayer)) {
+          setScore(currentPlayer);
+          renderScore();
+          resetBoard();
+      }
   }
   moveNum++;
+  //remove the event listener
   this.removeEventListener('dblclick', playMove);
 }
 
-//render move
-var plays = document.getElementsByClassName('play');
-Array.from(plays).forEach(play => {
-  play.addEventListener('dblclick', playMove, false);
-})
+/////////// renders /////////////////////////////////////////////////////////\
+
+resetBoard();
+
+//render game count
+var renderScore = function() {
+  var xGameScore = document.getElementById('xscore');
+  var oGameScore =  document.getElementById('oscore');
+  xGameScore.textContent = gameCount.X;
+  oGameScore.textContent = gameCount.O;
+}
+
+
 

@@ -12,8 +12,16 @@ var setScore = function(currentPlayer) {
   gameCount[currentPlayer]++
 }
 
+var newTracker = function() {
+    tracker = {
+        X: [[], [], []],
+        O: [[], [], []]
+    }
+}
+
 var resetBoard = function(){
     var plays = document.getElementsByClassName('play');
+    newTracker();
     Array.from(plays).forEach(play => {
       play.textContent = '';
       play.addEventListener('dblclick', playMove, false);
@@ -49,6 +57,7 @@ const playMove = function(event) {
           setScore(currentPlayer);
           renderScore();
           resetBoard();
+          return;
       }
   }
   moveNum++;

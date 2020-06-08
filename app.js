@@ -1,4 +1,5 @@
 //Model
+var players = {first: 'X', second: 'O'};
 var moveNum = 0;
 var tracker = {
     X: [[], [], []],
@@ -10,6 +11,13 @@ var gameCount = {X: 0, O: 0}
 //controllers
 var setScore = function(currentPlayer) {
   gameCount[currentPlayer]++
+}
+
+var setWinner = function(currentPlayer) {
+  if (players[first] !== currentPlayer) {
+      players[second] = players[first];
+      players[first] = currentPlayer;
+  }
 }
 
 var newTracker = function() {
@@ -48,7 +56,7 @@ var checkWinner = function(currentPlayer) {
 
 const playMove = function(event) {  
   //find current player
-  (moveNum % 2 === 0) ? currentPlayer = "X" : currentPlayer = "O";
+  (moveNum % 2 === 0) ? currentPlayer = players.first : currentPlayer = players.second;
   event.target.textContent = currentPlayer;
   tracker[currentPlayer][event.target.parentNode.id].push(Number(event.target.id))
   //check for winner
